@@ -1,0 +1,21 @@
+api_hash: 95688269a4763474080c70fca3ae5afb
+api_id: 33310238
+chat_id: -1001174318146
+download_directory: C:\Users\ajayj\Desktop\My Projects\Python\Telegram_Export\Altramind
+  Voice Notes
+end_date: null
+export_messages: true
+export_messages_file: messages_export.json
+file_formats:
+  audio:
+  - all
+  document:
+  - all
+  video:
+  - all
+ids_to_retry: []
+last_read_message_id: 24619
+max_messages: null
+media_types:
+- voice
+start_date: null

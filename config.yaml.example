@@ -1,0 +1,71 @@
+# Telegram Media Downloader Configuration
+# Copy this file to config.yaml and update with your values
+
+# Telegram API Credentials
+# Get these from https://my.telegram.org/apps
+api_id: YOUR_API_ID_HERE
+api_hash: YOUR_API_HASH_HERE
+
+# Chat/Channel ID to download from
+# Instructions: See README.md for how to get your chat_id
+chat_id: YOUR_CHAT_ID_HERE
+
+# Last read message ID (auto-updated after successful run)
+# Set to 0 for first run
+last_read_message_id: 0
+
+# Message IDs to retry (auto-managed by the downloader)
+ids_to_retry: []
+
+# Media types to download
+# Options: audio, document, photo, video, voice, video_note
+media_types:
+  - audio
+  - document
+  - photo
+  - video
+  - voice
+  - video_note
+
+# File format filters for specific media types
+# 'all' means download all formats
+file_formats:
+  audio:
+    - all
+  document:
+    - all
+  video:
+    - all
+
+# ============= OPTIONAL SETTINGS =============
+
+# Custom download directory (absolute or relative path)
+# If null, uses default directory structure
+download_directory: null
+
+# Filter: Download only messages after this date
+# Format: ISO format (e.g., '2023-01-01' or '2023-01-01T00:00:00')
+start_date: null
+
+# Filter: Download only messages before this date
+# Format: ISO format
+end_date: null
+
+# Limit the number of media items to download
+# If null, downloads all
+max_messages: null
+
+# Export message metadata to JSON file
+export_messages: false
+export_messages_file: messages_export.json
+
+# ============= PROXY SETTINGS (OPTIONAL) =============
+# Uncomment and fill in if you need to use a proxy
+# Supports: socks4, socks5, http
+
+# proxy:
+#   scheme: socks5
+#   hostname: proxy.example.com
+#   port: 1080
+#   username: your_username  # Optional
+#   password: your_password  # Optional
