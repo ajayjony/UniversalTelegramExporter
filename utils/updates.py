@@ -14,6 +14,7 @@ def check_for_updates() -> None:
     """Checks for new releases.
 
     Using Github API checks for new release and prints information of new release if available.
+    Silently fails if update check cannot be performed (network issues, API errors, etc.).
     """
     console = Console()
     try:
@@ -28,15 +29,40 @@ def check_for_updates() -> None:
             headers=headers,
         )
         res = conn.getresponse()
-        latest_release: dict = json.loads(res.read().decode("utf-8"))
-        if f"v{__version__}" != latest_release["tag_name"]:
+        
+        # Check if the request was successful
+        if res.status != 200:
+            # Silently fail for non-200 responses (404, 403, etc.)
+            return
+        
+        # Parse the response
+        response_data = res.read().decode("utf-8")
+        latest_release: dict = json.loads(response_data)
+        
+        # Validate that the response contains expected fields
+        if not isinstance(latest_release, dict):
+            return
+        
+        if "tag_name" not in latest_release:
+            # Response doesn't have the expected structure
+            return
+        
+        # Check if a new version is available
+        tag_name = latest_release.get("tag_name", "")
+        if tag_name and f"v{__version__}" != tag_name:
             update_message: str = (
-                f"## New version of Telegram-Media-Downloader is available - {latest_release['name']}\n"
+                f"## New version of Telegram-Media-Downloader is available - {latest_release.get('name', tag_name)}\n"
                 f"You are using an outdated version v{__version__} please pull in the changes using `git pull` or download the latest release.\n\n"
-                f"Find more details about the latest release here - {latest_release['html_url']}"
+                f"Find more details about the latest release here - {latest_release.get('html_url', 'https://github.com/ajayjony/UniversalTelegramExporter/releases')}"
             )
             console.print(Markdown(update_message))
+    except (json.JSONDecodeError, KeyError, ValueError) as e:
+        # Silently fail for parsing errors - these are not critical
+        pass
+    except (http.client.HTTPException, OSError, TimeoutError) as e:
+        # Silently fail for network errors - these are not critical
+        pass
     except Exception as e:
-        console.log(
-            f"Following error occurred when checking for updates\n{e.__class__}, {e}"
-        )
+        # Log unexpected errors at debug level only
+        # Don't show error to user as update check is non-critical
+        pass

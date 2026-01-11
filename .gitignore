@@ -1,20 +1,44 @@
+# IDE and Editor files
 .idea/
-*.pyc
-*.pid
-*.cfg
-*.db
-*.env
+.vscode/
+*.swp
+*.swo
+*~
 .DS_Store
-.cache/
-.mypy_cache/
+
+# Python cache and compiled files
+__pycache__/
+*.py[cod]
+*$py.class
+*.pyc
+*.pyo
+*.pyd
+.Python
+
+# Testing and coverage
+.pytest_cache/
 .coverage
-settings.json
+.coverage.*
+htmlcov/
+.tox/
+.hypothesis/
+*.cover
+
+# Type checking
+.mypy_cache/
+.dmypy.json
+dmypy.json
+
+# Environment and virtual environments
+*.env
+.env
+.venv
+venv/
+ENV/
+env/
+python-version
 
 # Distribution / packaging
-.Python
-.pytest_cache
-.python-version
-env/
 build/
 develop-eggs/
 dist/
@@ -23,7 +47,6 @@ eggs/
 .eggs/
 lib/
 lib64/
-logs/
 parts/
 sdist/
 share/
@@ -33,25 +56,33 @@ wheels/
 .installed.cfg
 *.egg
 
-
 # Jupyter Notebook
 .ipynb_checkpoints
 *.ipynb
 
-# virtualenv
-.venv
-venv/
-ENV/
-bin/
-include/
-pip-selfcheck.json
-lib64
+# System files
+*.pid
+*.cfg
+*.db
+settings.json
+.cache/
+logs/
 
-#Telegram Sessions
+# Telegram-specific files
+# Session files
 *.session
 *.session-journal
 
-#Downloaded documents
+# Config files and backups (user-specific, should not be tracked)
+config.yaml
+.config_backups/
+*.backup
+*.backup.*
+
+# Output directory (downloads, logs, sessions)
+Output/
+
+# Downloaded media directories (if created in root)
 documents/
 audio/
 document/
@@ -59,6 +90,3 @@ photo/
 voice/
 video/
 video_note/
-
-# Config file
-config.yaml
